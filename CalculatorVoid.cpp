@@ -50,7 +50,7 @@ void diiv(int a, int b){
     }
    
 
-}
+} 
 
 
 int main(){
@@ -86,5 +86,9 @@ int main(){
         cout<<"Choose a correct operator available";
 
     }
+
+    
+    system("pause"); // Add this line before closing main()
+    return 0;
 
 }
