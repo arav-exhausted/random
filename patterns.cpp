@@ -352,6 +352,7 @@ int main(){
     cin>>n;
     cout<<endl;
 
+    
     pattern1(n);
 
 }
