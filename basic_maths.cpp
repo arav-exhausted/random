@@ -1,26 +1,46 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void check_armstrongNo(int n){
+     int sum=0;
+    int dup = n;
 
-void reverse(int n){
+
+  
+    while(n>0){
+        int ld= n%10;
+        n = n/10;
+
+    sum = sum + ld*ld*ld;
+
+
+    }
+
    
 
-    while(n>0){
-        int lastdigit = n%10;
-        n = n/10;
-        cout<<lastdigit;
+    if(sum == dup){
+        cout<<"yes";
 
-        
+
     }
+    else{ cout<<"no";
+    }
+
+    
+    
+
 
 }
 
 
+
+
 int main(){
-    int n;
-    cin>> n;
-    reverse(n);
-    return 0;
+    int n = 8;
+    
+
+   
+
 
 }
 
