@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetheria Dynamics - Future Flight</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Define the futuristic Inter font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Deep black background */
+        }
+
+        /* Neon Glow Effect for elements */
+        .neon-glow {
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5),
+                        0 0 20px rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.8),
+                        0 0 30px rgba(0, 255, 255, 0.5),
+                        0 0 50px rgba(0, 255, 255, 0.1);
+        }
+
+        /* Pulsating animation for the hero quote */
+        @keyframes pulse-neon {
+            0%, 100% { color: #88ffff; text-shadow: 0 0 7px #00ffff; }
+            50% { color: #00ffff; text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff80; }
+        }
+
+        .hero-quote {
+            animation: pulse-neon 2.5s infinite alternate;
+        }
+
+        /* CSS for the animated grid background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, #0a1827 1px, transparent 1px),
+                              linear-gradient(to bottom, #0a1827 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+            animation: moveGrid 30s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 50px 50px; }
+        }
+
+        /* Custom scroll indicator */
+        #scroll-indicator {
+            height: 4px;
+            background: linear-gradient(90deg, rgba(0,255,255,1) 0%, rgba(5,5,53,0.5) 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 0;
+            transition: width 0.1s linear;
+        }
+
+        /* Custom style for the featured device image */
+        .device-mockup {
+            transform: perspective(1000px) rotateY(-5deg) rotateX(10deg);
+            transition: transform 0.5s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        .device-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 min-h-screen">
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-indicator"></div>
+
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm shadow-2xl shadow-cyan-900/10">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-extrabold text-cyan-400 tracking-wider hover:text-white transition duration-300">
+                AETHERIA
+            </a>
+            <div class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#home" class="hover:text-cyan-400 transition duration-200 neon-glow-text">Home</a>
+                <a href="#technology" class="hover:text-cyan-400 transition duration-200 neon-glow-text">Technology</a>
+                <a href="#services" class="hover:text-cyan-400 transition duration-200 neon-glow-text">Solutions</a>
+                <a href="#contact" class="hover:text-cyan-400 transition duration-200 neon-glow-text">Contact</a>
+            </div>
+            <button class="md:hidden text-cyan-400 hover:text-white focus:outline-none" id="menu-button" aria-label="Open menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90 pt-2 pb-4 space-y-1 text-center border-t border-cyan-800/50">
+            <a href="#home" class="block px-3 py-2 text-base font-medium hover:bg-cyan-900/30">Home</a>
+            <a href="#technology" class="block px-3 py-2 text-base font-medium hover:bg-cyan-900/30">Technology</a>
+            <a href="#services" class="block px-3 py-2 text-base font-medium hover:bg-cyan-900/30">Solutions</a>
+            <a href="#contact" class="block px-3 py-2 text-base font-medium hover:bg-cyan-900/30">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center p-4">
+            <div class="max-w-4xl space-y-8 z-10">
+                <h1 class="text-6xl sm:text-8xl font-extrabold tracking-tight text-white uppercase">
+                    Zero-G Propulsion
+                </h1>
+                <p class="text-2xl sm:text-4xl font-light text-cyan-400 hero-quote leading-relaxed">
+                    "We make you fly in the air"
+                </p>
+                <div class="pt-8">
+                    <button class="bg-cyan-600 hover:bg-cyan-500 text-black font-bold py-3 px-8 rounded-full text-xl neon-glow border border-cyan-400">
+                        Explore Propulsion
+                    </button>
+                </div>
+            </div>
+            <!-- Floating element for dynamic animation -->
+            <div id="floating-orb" class="absolute w-20 h-20 bg-cyan-500/10 rounded-full blur-xl border border-cyan-400/30 pointer-events-none"></div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-extrabold text-white mb-4 tracking-wider">CORE TECHNOLOGY</h2>
+                <p class="text-xl text-gray-400">Harnessing the power of gravitational waves for personal flight.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Feature 1: Anti-Gravity Field -->
+                <div class="bg-gray-900 p-8 rounded-lg border border-cyan-800 neon-glow hover:border-cyan-500 transition duration-300">
+                    <i data-lucide="zap" class="w-10 h-10 text-cyan-400 mb-4 mx-auto md:mx-0"></i>
+                    <h3 class="text-3xl font-semibold text-white mb-3">Gravitic Drive</h3>
+                    <p class="text-gray-400">Utilizing stable-state gravimetric fields, our systems negate local gravity with 99.9% efficiency, ensuring absolute stability.</p>
+                </div>
+                <!-- Feature 2: Quantum AI Navigation -->
+                <div class="bg-gray-900 p-8 rounded-lg border border-cyan-800 neon-glow hover:border-cyan-500 transition duration-300">
+                    <i data-lucide="brain-circuit" class="w-10 h-10 text-cyan-400 mb-4 mx-auto md:mx-0"></i>
+                    <h3 class="text-3xl font-semibold text-white mb-3">Quantum Guidance</h3>
+                    <p class="text-gray-400">A quantum-entangled AI computes millions of optimal flight paths per second, making collisions theoretically impossible.</p>
+                </div>
+                <!-- Feature 3: Energy Synthesis -->
+                <div class="bg-gray-900 p-8 rounded-lg border border-cyan-800 neon-glow hover:border-cyan-500 transition duration-300">
+                    <i data-lucide="battery-charging" class="w-10 h-10 text-cyan-400 mb-4 mx-auto md:mx-0"></i>
+                    <h3 class="text-3xl font-semibold text-white mb-3">Fusion Cell</h3>
+                    <p class="text-gray-400">Powered by micro-fusion cells, a single charge lasts for an entire planetary rotation, achieving unmatched endurance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section id="services" class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:space-x-12 items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h2 class="text-5xl font-extrabold text-white mb-4 tracking-wider">THE VORTEX SUIT</h2>
+                    <p class="text-xl text-gray-400 mb-6">Personal flight redefined. Lightweight, powerful, and utterly seamless.</p>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center space-x-3"><i data-lucide="rocket" class="w-6 h-6 text-cyan-400"></i><span>Mach 1.5 Atmospheric Speed</span></li>
+                        <li class="flex items-center space-x-3"><i data-lucide="shield-check" class="w-6 h-6 text-cyan-400"></i><span>Atmospheric Pressure Shielding</span></li>
+                        <li class="flex items-center space-x-3"><i data-lucide="move-up-right" class="w-6 h-6 text-cyan-400"></i><span>Vertical Take-Off and Landing (VTOL)</span></li>
+                    </ul>
+                    <a href="#" class="mt-8 inline-block text-cyan-400 hover:text-white font-medium text-lg border-b border-cyan-400 pb-1 transition duration-300">
+                        Request a Demo <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i>
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <!-- Placeholder Image for a futuristic device -->
+                    <img src="https://placehold.co/600x400/0b1c31/00ffff?text=VORTEX+FLIGHT+SUIT&font=inter"
+                         alt="Futuristic Flight Suit Mockup"
+                         class="w-full max-w-md rounded-xl device-mockup border-4 border-cyan-700/50">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="max-w-4xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-900 p-10 rounded-xl border-t-4 border-cyan-500 neon-glow">
+                <h2 class="text-4xl font-bold text-white mb-6 text-center">JOIN THE AETHERIA NETWORK</h2>
+                <form action="#" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-lg font-medium text-gray-300 mb-2">Name</label>
+                        <input type="text" id="name" required
+                               class="w-full px-4 py-3 bg-black border border-cyan-700 rounded-lg focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500 transition duration-300">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-lg font-medium text-gray-300 mb-2">Email</label>
+                        <input type="email" id="email" required
+                               class="w-full px-4 py-3 bg-black border border-cyan-700 rounded-lg focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500 transition duration-300">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-lg font-medium text-gray-300 mb-2">Inquiry</label>
+                        <textarea id="message" rows="4" required
+                                  class="w-full px-4 py-3 bg-black border border-cyan-700 rounded-lg focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500 transition duration-300"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-500 text-black font-bold py-3 rounded-lg text-xl neon-glow border border-cyan-400">
+                        Send Transmission
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-cyan-900/50 mt-12">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2077 Aetheria Dynamics. All Rights Reserved. | Designed for the future of human flight.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Dynamic Effects -->
+    <script>
+        // 1. Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 2. Mobile Menu Toggle
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 3. Scroll Indicator (Progress Bar)
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const width = (scrollPosition / totalHeight) * 100;
+
+            if (totalHeight > 0) {
+                scrollIndicator.style.width = width + '%';
+            } else {
+                scrollIndicator.style.width = '0%';
+            }
+        });
+
+        // 4. Floating Orb Animation (Simple JS Animation)
+        const orb = document.getElementById('floating-orb');
+        let t = 0;
+        const speed = 0.005; // speed of oscillation
+
+        function animateOrb() {
+            t += speed;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // Calculate sinusoidal movements
+            const x = 50 + 40 * Math.sin(t / 1.5) * Math.cos(t / 2) + '%';
+            const y = 50 + 40 * Math.cos(t / 1.8) * Math.sin(t / 1.3) + '%';
+            const scale = 1 + 0.5 * Math.sin(t / 3);
+
+            orb.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            orb.style.left = x;
+            orb.style.top = y;
+
+            requestAnimationFrame(animateOrb);
+        }
+
+        // Start animation once the window is loaded
+        window.onload = animateOrb;
+
+        // 5. Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

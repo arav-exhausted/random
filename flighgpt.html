@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Futuristic — We make you fly in the air</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#04050a;
+      --glass: rgba(255,255,255,0.04);
+      --accent1: #6EE7F7; /* cyan */
+      --accent2: #7C4DFF; /* violet */
+      --accent3: #00FFA3; /* mint */
+      --muted: rgba(255,255,255,0.12);
+      --card-shadow: 0 8px 30px rgba(2,6,23,0.7);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,77,255,0.08), transparent 6%),
+                  radial-gradient(900px 500px at 90% 90%, rgba(110,231,247,0.05), transparent 10%),
+                  linear-gradient(180deg, #01020a 0%, #04050a 100%);
+      color:#e9eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* animated starfield */
+    #spaceCanvas{
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+    }
+
+    header{
+      position:relative; z-index:2; padding:48px 6vw; display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo .mark{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;box-shadow:0 6px 24px rgba(124,77,255,0.16);font-family:Orbitron,monospace;font-weight:900}
+    nav{display:flex;gap:20px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px}
+    nav a:hover{color:var(--accent1);background:rgba(255,255,255,0.02)}
+
+    .hero{
+      position:relative; z-index:1; min-height:78vh; display:grid;grid-template-columns:1fr 420px; gap:40px; align-items:center; padding:40px 6vw;
+    }
+    .hero-left{max-width:780px}
+    h1{font-family:Orbitron,monospace;font-size:48px;line-height:1.02;margin:0 0 16px}
+    h1 .neon{background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3)); -webkit-background-clip:text;background-clip:text;color:transparent}
+    p.lead{color:rgba(233,238,248,0.78);font-size:18px;margin:0 0 26px}
+
+    .cta-row{display:flex;gap:16px;align-items:center}
+    .btn{
+      display:inline-grid;place-items:center;padding:14px 20px;border-radius:12px;font-weight:700;border:1px solid rgba(255,255,255,0.06);cursor:pointer;text-decoration:none
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#05182a;box-shadow:0 10px 40px rgba(124,77,255,0.12);transform:translateY(0);transition:transform .18s ease}
+    .btn-primary:active{transform:translateY(2px)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .quote-card{
+      margin-top:28px;padding:16px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);box-shadow:var(--card-shadow);border:1px solid rgba(255,255,255,0.03)
+    }
+    .quote-card h3{font-family:Orbitron,monospace;margin:0;font-size:16px}
+    .quote{font-size:20px;margin-top:8px;color:var(--accent1);font-weight:700}
+
+    .hero-right{display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--glass);padding:18px;border-radius:14px;box-shadow:var(--card-shadow);border:1px solid rgba(255,255,255,0.03)}
+    .mock-viewport{height:260px;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(160deg, rgba(124,77,255,0.08), rgba(110,231,247,0.02));display:flex;flex-direction:column}
+    .mock-viewport img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.9}
+    .features{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .feature{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.012), transparent);border:1px solid rgba(255,255,255,0.02)}
+    .feature small{display:block;color:var(--muted);font-weight:600}
+
+    /* floating orbits */
+    .orbit{
+      position:absolute; right:-40px; top:-40px; width:290px;height:290px;border-radius:50%;border:1px dashed rgba(255,255,255,0.03);filter:blur(8px);transform:rotate(0deg);
+      animation:spin 28s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* sections */
+    section{padding:80px 6vw; position:relative; z-index:1}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,23,0.55)}
+    .panel h4{margin:0 0 10px;font-family:Orbitron,monospace}
+
+    footer{padding:36px 6vw;border-top:1px solid rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center;gap:20px}
+
+    /* subtle entrance animations */
+    .reveal{opacity:0;transform:translateY(10px);transition:all .72s cubic-bezier(.2,.9,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* responsiveness */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;min-height:72vh}
+      .hero-right{order:-1}
+      .grid-3{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="spaceCanvas"></canvas>
+
+  <header>
+    <div class="logo">
+      <div class="mark">FLY</div>
+      <div>
+        <div style="font-weight:700">AeroLabs</div>
+        <div style="font-size:12px;color:var(--muted)">Interface & Systems</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-ghost" href="#">Get Started</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Designing the future with <span class="neon">speed & grace</span></h1>
+        <p class="lead">A single-page futuristic interface to showcase motion, system thinking and the little tech-magic that makes physical experiences feel weightless.</p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Launch Project</a>
+          <a class="btn btn-ghost" href="#projects">See Demos</a>
+        </div>
+
+        <div class="quote-card">
+          <h3>Tagline</h3>
+          <div class="quote">"We make you fly in the air"</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card mock-viewport">
+          <img src="https://source.unsplash.com/collection/190727/800x600" alt="futuristic image">
+          <div class="orbit"></div>
+        </div>
+
+        <div class="card features">
+          <div class="feature">
+            <small>Realtime</small>
+            <strong>Reactive Animations</strong>
+          </div>
+          <div class="feature">
+            <small>Design</small>
+            <strong>Glass & Neon Aesthetics</strong>
+          </div>
+          <div class="feature">
+            <small>UX</small>
+            <strong>Micro-interactions</strong>
+          </div>
+          <div class="feature">
+            <small>Scale</small>
+            <strong>Pixel-perfect Layouts</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="grid-3">
+        <div class="panel reveal">
+          <h4>Flight Controls</h4>
+          <p style="color:var(--muted)">A lightweight JS layer to orchestrate motion with low CPU overhead.</p>
+        </div>
+        <div class="panel reveal">
+          <h4>Procedural Backgrounds</h4>
+          <p style="color:var(--muted)">Canvas-driven elements that respond to cursor and time.</p>
+        </div>
+        <div class="panel reveal">
+          <h4>Adaptive Themes</h4>
+          <p style="color:var(--muted)">Color steps and gradients that adapt to content and context.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h3 style="font-family:Orbitron,monospace;margin:0 6vw 20px">Selected Demos</h3>
+      <div style="padding:0 6vw;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <div class="panel reveal">
+          <h4>Particle Jet</h4>
+          <p style="color:var(--muted)">Hover the preview to feel momentum and parallax.</p>
+        </div>
+        <div class="panel reveal">
+          <h4>Neon Dashboard</h4>
+          <p style="color:var(--muted)">Data visualized with motion-first rules.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div style="display:flex;gap:30px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:320px" class="panel reveal">
+          <h4>Get in Touch</h4>
+          <p style="color:var(--muted)">Send a quick note — we'll prototype a flight plan.</p>
+          <form id="contactForm" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+            <input name="name" placeholder="Your name" style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" required>
+            <input name="email" type="email" placeholder="Email" style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" required>
+            <textarea name="msg" placeholder="Short message" rows="4" style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
+            <div style="display:flex;gap:12px">
+              <button type="submit" class="btn btn-primary">Send</button>
+              <button type="button" id="demoBtn" class="btn btn-ghost">Request Demo</button>
+            </div>
+          </form>
+        </div>
+
+        <div style="width:320px;min-width:260px" class="panel reveal">
+          <h4>System Status</h4>
+          <div style="margin-top:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span>Engines</span><strong id="engines">Online</strong></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span>Neon Cluster</span><strong id="neon">Normal</strong></div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><span>Telemetry</span><strong id="tele">Stable</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="mark" style="width:36px;height:36px;font-size:12px">FLY</div>
+      <div style="font-size:14px">AeroLabs • Built with ♥</div>
+    </div>
+    <div style="color:var(--muted)">© <span id="year"></span> AeroLabs — All rights reserved</div>
+  </footer>
+
+  <script>
+    // populate year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // simple reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); })
+    }, {threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+
+    // contact form stub
+    document.getElementById('contactForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      alert('Message sent — thanks! (demo only)');
+      e.target.reset();
+    });
+
+    // demo button microinteraction
+    document.getElementById('demoBtn').addEventListener('click', ()=>{
+      const el = document.getElementById('engines');
+      el.textContent = 'Warming';
+      el.style.color = 'var(--accent3)';
+      setTimeout(()=>{ el.textContent='Online'; el.style.color='inherit'}, 1400);
+    });
+
+    // lightweight animated starfield & particles
+    const canvas = document.getElementById('spaceCanvas');
+    const ctx = canvas.getContext('2d');
+    let w=canvas.width=innerWidth, h=canvas.height=innerHeight;
+    const stars=[];
+    for(let i=0;i<220;i++) stars.push({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1.2+0.2, vx:(Math.random()-0.5)*0.1, vy:(Math.random()-0.5)*0.1});
+    function resize(){ w=canvas.width=innerWidth; h=canvas.height=innerHeight }
+    addEventListener('resize', resize);
+    let t=0;
+    function draw(){ ctx.clearRect(0,0,w,h);
+      // glow center
+      const grad = ctx.createRadialGradient(w*0.2,h*0.15,0,w*0.2,h*0.15,600);
+      grad.addColorStop(0,'rgba(124,77,255,0.06)');
+      grad.addColorStop(1,'rgba(124,77,255,0)');
+      ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+
+      for(let s of stars){
+        s.x += Math.cos(t*0.0008 + s.z) * s.vx * 4;
+        s.y += Math.sin(t*0.0006 + s.z) * s.vy * 4;
+        if(s.x<0||s.x>w||s.y<0||s.y>h){ s.x=Math.random()*w; s.y=Math.random()*h }
+        const size = (s.z*1.6);
+        ctx.beginPath(); ctx.globalAlpha = 0.85*s.z; ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.arc(s.x,s.y,size,size,0,Math.PI*2); ctx.fill(); ctx.closePath();
+      }
+
+      // subtle connecting lines for nearby particles
+      ctx.globalAlpha = 0.08;
+      ctx.strokeStyle = 'white';
+      for(let i=0;i<60;i++){
+        const a = stars[i];
+        for(let j=i+1;j<60;j++){
+          const b = stars[j];
+          const dx=a.x-b.x, dy=a.y-b.y; const dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist<120){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.closePath(); }
+        }
+      }
+      ctx.globalAlpha=1;
+      t+=16;
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // small mouse-driven parallax on hero image
+    const mock = document.querySelector('.mock-viewport img');
+    window.addEventListener('mousemove', e=>{
+      const cx = innerWidth/2, cy = innerHeight/2;
+      const dx = (e.clientX - cx)/cx; const dy = (e.clientY - cy)/cy;
+      if(mock) mock.style.transform = `translate(${dx*8}px, ${dy*6}px) scale(1.02)`;
+    });
+
+    // tiny performance-friendly staggered reveal
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('.reveal').forEach((el,i)=> setTimeout(()=>el.classList.add('visible'), 180 + i*120));
+    });
+  </script>
+</body>
+</html>

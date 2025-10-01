@@ -1,0 +1,75 @@
+DSA Roadmap: Study Plan & Practice Guide
+
+---
+
+### 1. Math & Complexity Basics
+
+**Subtopics:** Big-O notation, time & space complexity, recursion basics, logarithms, modular arithmetic
+**Things to study:** Loop analysis, nested loops, recursive function calls, log properties, modular operations
+**Practice:** Analyze loops, recursive factorial/Fibonacci, identify log patterns, compute modular operations
+
+### 2. Arrays
+
+**Subtopics:** 1D & 2D arrays, traversal, insertion, deletion, search, prefix/suffix sums
+**Things to study:** Indexing, iteration, memory layout, sliding window, two-pointer technique
+**Practice:** Reverse array, find max/min/sum, implement prefix sum array
+
+### 3. Strings
+
+**Subtopics:** Traversal, manipulation, substrings, concatenation, comparison, palindrome/anagram check
+**Things to study:** String methods, pattern matching basics
+**Practice:** Reverse string, palindrome check, count substring occurrences
+
+### 4. Linked Lists
+
+**Subtopics:** Singly, doubly, circular linked lists, insertion, deletion, traversal, cycle detection
+**Things to study:** Pointer manipulation, edge cases
+**Practice:** Implement insertion/deletion, reverse linked list, detect cycle
+
+### 5. Stacks & Queues
+
+**Subtopics:** Stack (LIFO), Queue (FIFO), Deque, circular queue
+**Things to study:** Implementation using arrays & linked lists, applications (expression evaluation, backtracking)
+**Practice:** Implement stack & queue, balanced parentheses, sliding window max using deque
+
+### 6. Recursion & Backtracking
+
+**Subtopics:** Simple recursion, backtracking patterns (permutations, combinations, subset generation), N-Queens, Sudoku
+**Things to study:** Base case & recursion tree, pruning & early stopping
+**Practice:** Generate subsets & permutations, solve N-Queens
+
+### 7. Hashing
+
+**Subtopics:** Hash tables, maps, sets, collision handling (chaining/open addressing), frequency counting
+**Things to study:** Hash functions, time complexity of operations
+**Practice:** Count frequency, two-sum problem, detect duplicates
+
+### 8. Searching & Sorting
+
+**Subtopics:** Linear & binary search, bubble/insertion/selection/merge/quick/heap sort
+**Things to study:** Stable vs unstable sort, divide & conquer, iterative vs recursive binary search
+**Practice:** Implement sorts, binary search, first/last occurrence search
+
+### 9. Trees
+
+**Subtopics:** Binary trees, BSTs, traversal (in-order, pre-order, post-order, level-order), height/depth/diameter, balanced trees
+**Things to study:** Recursive & iterative traversal, tree properties, BST insertion/deletion
+**Practice:** Tree traversals, count nodes, check BST
+
+### 10. Graphs
+
+**Subtopics:** Representation (adjacency list/matrix), BFS, DFS, shortest path (Dijkstra/Bellman-Ford), MST (Kruskal/Prim)
+**Things to study:** Directed vs undirected, weighted vs unweighted, cycle detection
+**Practice:** BFS/DFS implementation, cycle detection, shortest path
+
+### 11. Dynamic Programming
+
+**Subtopics:** Memoization & tabulation, classic problems (Fibonacci, knapsack, coin change), LCS, LIS, matrix chain multiplication
+**Things to study:** Overlapping subproblems, optimal substructure, bottom-up vs top-down
+**Practice:** Fibonacci, 0/1 Knapsack, LIS
+
+### 12. Advanced Topics
+
+**Subtopics:** Tries, segment trees, Fenwick trees, Disjoint Set/Union-Find, advanced graph algorithms
+**Things to study:** Implementation & use-cases, range queries/updates, efficient union/find operations
+**Practice:** Trie implementation, segment tree range sum, Kruskal with union-find
