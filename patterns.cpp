@@ -353,7 +353,7 @@ int main(){
     cout<<endl;
 
     
-    pattern1(n);
+    ladder(n);
 
 }
 
